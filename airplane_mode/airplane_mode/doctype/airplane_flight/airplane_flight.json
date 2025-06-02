@@ -7,15 +7,26 @@
  "engine": "InnoDB",
  "field_order": [
   "airplane",
+  "column_break_vuwc",
+  "status",
   "amended_from",
+  "airport_details_section",
+  "source_airport",
+  "source_airport_code",
+  "column_break_ijgc",
+  "destination_airport",
+  "destination_airport_code",
+  "departure_details_section",
   "date_of_departure",
-  "time_of_departure",
-  "status"
+  "duration",
+  "column_break_ndwy",
+  "time_of_departure"
  ],
  "fields": [
   {
    "fieldname": "amended_from",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Amended From",
    "no_copy": 1,
    "options": "Airplane Flight",
@@ -49,13 +60,71 @@
    "fieldtype": "Select",
    "label": "Status",
    "options": "Scheduled\nCompleted\nCancelled"
+  },
+  {
+   "fieldname": "source_airport",
+   "fieldtype": "Link",
+   "label": "Source Airport",
+   "options": "Airport",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "source_airport.code",
+   "fieldname": "source_airport_code",
+   "fieldtype": "Data",
+   "label": "Source Airport Code"
+  },
+  {
+   "fieldname": "destination_airport",
+   "fieldtype": "Link",
+   "label": "Destination Airport",
+   "options": "Airport",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "destination_airport.code",
+   "fieldname": "destination_airport_code",
+   "fieldtype": "Data",
+   "label": "Destination Airport Code"
+  },
+  {
+   "fieldname": "column_break_vuwc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "airport_details_section",
+   "fieldtype": "Section Break",
+   "label": "Airport Details"
+  },
+  {
+   "fieldname": "column_break_ijgc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "departure_details_section",
+   "fieldtype": "Section Break",
+   "label": "Departure Details"
+  },
+  {
+   "fieldname": "column_break_ndwy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "duration",
+   "fieldtype": "Duration",
+   "label": "Duration"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2025-06-02 19:21:24.616925",
+ "links": [
+  {
+   "link_doctype": "Airplane Ticket",
+   "link_fieldname": "flight"
+  }
+ ],
+ "modified": "2025-06-02 23:41:34.639115",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane Flight",
