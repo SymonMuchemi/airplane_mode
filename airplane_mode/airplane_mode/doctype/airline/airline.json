@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "prompt",
  "creation": "2025-06-01 15:21:59.317131",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -39,10 +40,11 @@
    "link_fieldname": "airline"
   }
  ],
- "modified": "2025-06-01 17:21:50.198014",
+ "modified": "2025-06-02 15:16:36.137284",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airline",
+ "naming_rule": "Set by user",
  "owner": "Administrator",
  "permissions": [
   {

@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "prompt",
  "creation": "2025-06-01 14:50:56.712138",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -34,7 +35,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-06-01 15:36:38.902330",
+ "modified": "2025-06-02 15:22:19.807884",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airport",

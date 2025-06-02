@@ -7,7 +7,8 @@
  "field_order": [
   "first_name",
   "last_name",
-  "date_of_birth"
+  "date_of_birth",
+  "full_name"
  ],
  "fields": [
   {
@@ -28,6 +29,12 @@
    "in_list_view": 1,
    "label": "First Name",
    "reqd": 1
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "is_virtual": 1,
+   "label": "Full Name"
   }
  ],
  "grid_page_length": 50,
@@ -38,7 +45,7 @@
    "link_fieldname": "passenger"
   }
  ],
- "modified": "2025-06-01 17:23:26.264158",
+ "modified": "2025-06-02 16:40:17.735279",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Flight Passenger",

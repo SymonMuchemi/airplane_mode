@@ -17,7 +17,8 @@
   "departure_time",
   "column_break_lgxy",
   "duration_of_flight",
-  "status"
+  "status",
+  "amended_from"
  ],
  "fields": [
   {
@@ -83,12 +84,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "duration_of_flight",
-   "fieldtype": "Time",
-   "label": "Duration of Flight",
-   "reqd": 1
-  },
-  {
    "fieldname": "column_break_xqjq",
    "fieldtype": "Column Break"
   },
@@ -107,12 +102,29 @@
    "fieldtype": "Select",
    "label": "Status",
    "options": "Booked\nChecked-In\nBoarded"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Airplane Ticket",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "duration_of_flight",
+   "fieldtype": "Duration",
+   "label": "Duration of Flight",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2025-06-01 17:20:21.322773",
+ "modified": "2025-06-02 05:25:11.416589",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane Ticket",
