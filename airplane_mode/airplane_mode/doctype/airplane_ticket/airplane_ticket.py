@@ -6,4 +6,8 @@ from frappe.model.document import Document
 
 
 class AirplaneTicket(Document):
-	pass
+    def before_save(self):
+        """ensure the total amount payable by the passenger is calculated correctly."""
+        add_ons_total = sum(add_on.amount for add_on in self.add_ons if add_on.amount)
+
+        self.total_amount = self.flight_price + add_ons_total
