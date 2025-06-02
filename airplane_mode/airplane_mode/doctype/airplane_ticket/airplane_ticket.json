@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:{flight}-{source_airport}-to-{destination_airport}-{#####}",
  "creation": "2025-06-01 16:45:40.764522",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -18,7 +19,13 @@
   "column_break_lgxy",
   "duration_of_flight",
   "status",
-  "amended_from"
+  "amended_from",
+  "add_ons_section",
+  "add_ons",
+  "summary_section",
+  "flight_price",
+  "column_break_ascf",
+  "total_amount"
  ],
  "fields": [
   {
@@ -28,7 +35,8 @@
    "label": "Passenger",
    "length": 1,
    "options": "Flight Passenger",
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "fieldname": "source_airport",
@@ -118,16 +126,48 @@
    "fieldtype": "Duration",
    "label": "Duration of Flight",
    "reqd": 1
+  },
+  {
+   "fieldname": "add_ons",
+   "fieldtype": "Table",
+   "label": "Add Ons",
+   "options": "Airplane Ticket Add-on Item"
+  },
+  {
+   "fieldname": "add_ons_section",
+   "fieldtype": "Section Break",
+   "label": "Add Ons"
+  },
+  {
+   "fieldname": "summary_section",
+   "fieldtype": "Section Break",
+   "label": "Summary"
+  },
+  {
+   "fieldname": "flight_price",
+   "fieldtype": "Currency",
+   "label": "Flight Price",
+   "reqd": 1
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount"
+  },
+  {
+   "fieldname": "column_break_ascf",
+   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-06-02 05:25:11.416589",
+ "modified": "2025-06-02 17:54:47.412932",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane Ticket",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
