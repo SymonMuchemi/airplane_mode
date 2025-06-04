@@ -17,7 +17,7 @@ class AirplaneTicket(Document):
     def before_submit(self):
         """Ensure the ticket is validated before submission."""
         self.ensure_boarded_status()
-    
+
     def calculate_total_amount(self):
         """ensure the total amount payable by the passenger is calculated correctly."""
         add_ons_total = sum(add_on.amount for add_on in self.add_ons if add_on.amount)
