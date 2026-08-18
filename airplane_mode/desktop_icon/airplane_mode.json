@@ -1,0 +1,20 @@
+{
+ "app": "airplane_mode",
+ "bg_color": "gray",
+ "creation": "2026-08-18 01:25:51.016953",
+ "docstatus": 0,
+ "doctype": "Desktop Icon",
+ "hidden": 0,
+ "icon_type": "Link",
+ "idx": 0,
+ "label": "Airplane Mode",
+ "link_to": "Airplane Mode",
+ "link_type": "Workspace Sidebar",
+ "modified": "2026-08-18 01:26:17.913999",
+ "modified_by": "Administrator",
+ "name": "Airplane Mode",
+ "owner": "Administrator",
+ "restrict_removal": 0,
+ "roles": [],
+ "standard": 1
+}
