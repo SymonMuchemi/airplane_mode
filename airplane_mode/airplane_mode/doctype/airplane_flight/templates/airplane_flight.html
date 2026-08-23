@@ -4,6 +4,7 @@ frappe.db.get_value("Airplane", doc.airplane, "airline") %}
 <h1 class="mb-4">{{ doc.name }}</h1>
 
 <h2>Flight Details</h2>
+
 <ul>
 	<li>Airline: {{ airline }}</li>
 	<li>{{ doc.source_airport_code }} -> {{ doc.destination_airport_code }}</li>
@@ -14,5 +15,7 @@ frappe.db.get_value("Airplane", doc.airplane, "airline") %}
 	<li>Duration: {{ frappe.utils.format_duration(doc.duration) }}</li>
 </ul>
 
-<a class="btn btn-primary" href="/book-flight-ticket/new?flight={{ doc.name }}">Book Flight</a>
+<a class="btn btn-primary" href="/ticket-booking-web-form/new?flight={{ doc.name }}"
+	>Book Flight</a
+>
 {% endblock %}
