@@ -12,6 +12,7 @@
   "airplane",
   "column_break_eyfs",
   "status",
+  "published",
   "airport_details_section",
   "source_airport",
   "source_airport_code",
@@ -124,6 +125,12 @@
   {
    "fieldname": "column_break_dfxz",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "published",
+   "fieldtype": "Check",
+   "label": "Published"
   }
  ],
  "grid_page_length": 50,
@@ -135,7 +142,7 @@
    "link_fieldname": "flight"
   }
  ],
- "modified": "2026-08-20 16:03:03.700289",
+ "modified": "2026-08-23 14:54:14.328245",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane Flight",
