@@ -24,9 +24,20 @@ class AirplaneTicket(Document):
 		if self.status != "Boarded":
 			frappe.throw("You can only submit the ticket if the status is 'Boarded'.")
 
-	@frappe.whitelist()
 	def generate_random_seat_number(self):
 		# Generate a random seat number in the format "A1", "B2", etc.
 		row = random.randint(1, 100)  # 1-100
 		column = random.choice(["A", "B", "C", "D", "E"])  # A-Z
 		return f"{row}{column}"
+
+	@frappe.whitelist()
+	def check_capacity(self, flight):
+		if not flight:
+			frappe.log_error("Flight is not specified")
+
+		airplane_name = frappe.db.get_value("Airplane Flight", flight, "airplane")
+		airplane_capacity = frappe.db.get_value("Airplane", airplane_name, "capacity")
+		existing_tickets_count = frappe.db.count("Airplane Ticket", filters={"flight": flight, "docstatus": ["!=", 2]})
+
+		if existing_tickets_count >= airplane_capacity:
+			frappe.response["message"] = "The airplane has reached its seating capacity. Cannot create a new ticket."
