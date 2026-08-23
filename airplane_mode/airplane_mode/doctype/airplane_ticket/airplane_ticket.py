@@ -2,8 +2,6 @@
 # For license information, please see license.txt
 
 import random
-import string
-
 import frappe
 from frappe.model.document import Document
 from frappe.utils import flt
@@ -28,6 +26,6 @@ class AirplaneTicket(Document):
 
 	def generate_random_seat_number(self):
 		# Generate a random seat number in the format "A1", "B2", etc.
-		row = random.randint(1, 30)  # 1-30
-		column = random.choice(string.ascii_uppercase[:26])  # A-Z
+		row = random.randint(1, 100)  # 1-100
+		column = random.choice(["A", "B", "C", "D", "E"])  # A-Z
 		return f"{row}{column}"
