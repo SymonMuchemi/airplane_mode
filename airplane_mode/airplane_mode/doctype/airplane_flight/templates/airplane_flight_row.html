@@ -1,0 +1,15 @@
+{% set airline = frappe.db.get_value("Airplane", doc.airplane, "airline") %}
+
+<div class="card mb-4">
+	<div class="card-body">
+		<h4 class="mb-1">{{ airline }}</h4>
+		<p class="text-muted mb-2">
+			{{ doc.source_airport_code }} -> {{ doc.destination_airport_code }}
+		</p>
+		<p class="text-muted mb-3">
+			{{ frappe.utils.format_date(doc.date_of_departure, "d MMMM, YYYY") }} | {{
+			doc.time_of_departure }} | {{ frappe.utils.format_duration(doc.duration) }}
+		</p>
+		<a href="/{{ doc.route }}">View Flight</a>
+	</div>
+</div>
