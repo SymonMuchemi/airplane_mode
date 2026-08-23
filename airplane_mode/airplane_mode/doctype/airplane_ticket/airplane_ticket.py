@@ -24,6 +24,7 @@ class AirplaneTicket(Document):
 		if self.status != "Boarded":
 			frappe.throw("You can only submit the ticket if the status is 'Boarded'.")
 
+	@frappe.whitelist()
 	def generate_random_seat_number(self):
 		# Generate a random seat number in the format "A1", "B2", etc.
 		row = random.randint(1, 100)  # 1-100
