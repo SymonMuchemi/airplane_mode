@@ -1,0 +1,36 @@
+{
+ "attach_files": "",
+ "attach_print": 0,
+ "channel": "System Notification",
+ "condition": "doc.status==\"Scheduled\"",
+ "condition_type": "Python",
+ "creation": "2026-08-23 18:03:06.506599",
+ "date_changed": "date_of_departure",
+ "days_in_advance": 1,
+ "docstatus": 0,
+ "doctype": "Notification",
+ "document_type": "Airplane Flight",
+ "enabled": 1,
+ "event": "Days Before",
+ "idx": 0,
+ "is_standard": 1,
+ "message": "Departs in 24 hours!",
+ "message_type": "Markdown",
+ "minutes_offset": 0,
+ "modified": "2026-08-23 18:03:06.506599",
+ "modified_by": "Administrator",
+ "module": "Airplane Mode",
+ "name": "Departs in 24 hours Notification",
+ "notification_message": "<h3>Flight {{ doc.name }} departs in 24 hours</h3>",
+ "notification_title": "Departs In 24 Hours",
+ "notification_type": "Alert",
+ "owner": "Administrator",
+ "recipients": [
+  {
+   "receiver_by_role": "System Manager"
+  }
+ ],
+ "send_system_notification": 0,
+ "send_to_all_assignees": 0,
+ "subject": "Departs in 24 hours!"
+}

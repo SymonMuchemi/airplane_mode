@@ -1,6 +1,19 @@
-<div
-	style="
-		width: 320px;
-		height: 480px;
-		background-color: {{ color }};"
-></div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Show Me Colors</title>
+    <style>
+        .color-box {
+            width: 200px;
+            height: 200px;
+            background-color: {{ frappe.form_dict.color or 'black' }};
+            border: 1px solid #000;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Show Me Colors</h1>
+    <div class="color-box"></div>
+</body>
+</html>

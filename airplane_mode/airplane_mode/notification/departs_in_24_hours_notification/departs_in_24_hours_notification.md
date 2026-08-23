@@ -1,0 +1,1 @@
+Departs in 24 hours!

@@ -1,10 +1,12 @@
 # Copyright (c) 2026, SymonMuchemi and contributors
 # For license information, please see license.txt
 
-import frappe
 import random
 import string
+
+import frappe
 from frappe.model.document import Document
+from frappe.utils import flt
 
 
 class AirplaneTicket(Document):
@@ -13,16 +15,12 @@ class AirplaneTicket(Document):
 		if len(add_on_types) != len(set(add_on_types)):
 			frappe.throw("You cannot add more than one add-on of the same type.")
 
-
 	def before_save(self):
-		total_add_ons_amount = 0
-
-		for item in self.add_ons:
-			total_add_ons_amount += item.amount
-
-		self.total_amount = self.flight_price + total_add_ons_amount
+		if not self.flight_price:
+			self.flight_price = 1000  # Default flight price if not provided
+		total_add_ons_amount = sum(flt(item.amount) for item in self.add_ons)
+		self.total_amount = flt(self.flight_price) + total_add_ons_amount
 		self.seat = self.generate_random_seat_number()
-
 
 	def before_submit(self):
 		if self.status != "Boarded":
