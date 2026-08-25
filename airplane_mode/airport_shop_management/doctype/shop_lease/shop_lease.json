@@ -1,0 +1,172 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "autoname": "LEASE-.####",
+ "creation": "2026-08-26 00:39:36.327933",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_wgzs",
+  "amended_from",
+  "airport",
+  "shop",
+  "tenant",
+  "column_break_saqb",
+  "status",
+  "first_payment_due_date",
+  "start_date",
+  "end_date",
+  "section_break_pgkh",
+  "monthly_rent_amount",
+  "contract_attachment",
+  "column_break_bpay",
+  "terms_and_conditions"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_wgzs",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Shop Lease",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "shop",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Shop",
+   "options": "Airport Shop",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "shop.airport",
+   "fieldname": "airport",
+   "fieldtype": "Link",
+   "label": "Airport",
+   "options": "Airport",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tenant",
+   "fieldtype": "Link",
+   "label": "Tenant",
+   "options": "Shop Tenant",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_saqb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Lease Status",
+   "options": "Draft\nUpcoming\nActive\nExpired\nCancelled",
+   "read_only": 1,
+   "sort_options": 1
+  },
+  {
+   "fieldname": "first_payment_due_date",
+   "fieldtype": "Date",
+   "label": "First Payment Due Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_pgkh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_if_empty": 1,
+   "fetch_from": "shop.monthly_rent_amount",
+   "fieldname": "monthly_rent_amount",
+   "fieldtype": "Currency",
+   "label": "Monthly Rent Amount",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "contract_attachment",
+   "fieldtype": "Attach",
+   "label": "Contract Attachment"
+  },
+  {
+   "fieldname": "column_break_bpay",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "terms_and_conditions",
+   "fieldtype": "Small Text",
+   "label": "Terms and Conditions"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-08-26 00:51:58.807011",
+ "modified_by": "Administrator",
+ "module": "Airport Shop Management",
+ "name": "Shop Lease",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Airport Authority Personnel",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

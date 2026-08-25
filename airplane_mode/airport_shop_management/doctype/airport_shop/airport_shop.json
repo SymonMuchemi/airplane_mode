@@ -35,6 +35,7 @@
    "fieldtype": "Select",
    "label": "Status",
    "options": "Available\nOccupied",
+   "read_only": 1,
    "sort_options": 1
   },
   {
@@ -66,7 +67,8 @@
    "fieldtype": "Currency",
    "label": "Monthly Rent Amount",
    "non_negative": 1,
-   "precision": "2"
+   "precision": "2",
+   "reqd": 1
   },
   {
    "fieldname": "section_break_jlda",
@@ -100,7 +102,7 @@
  "image_field": "shop_image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-08-26 00:12:39.126737",
+ "modified": "2026-08-26 00:52:36.941014",
  "modified_by": "Administrator",
  "module": "Airport Shop Management",
  "name": "Airport Shop",
