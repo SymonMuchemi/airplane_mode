@@ -10,6 +10,7 @@
   "section_break_ofx6",
   "amended_from",
   "airplane",
+  "gate",
   "column_break_eyfs",
   "status",
   "route",
@@ -150,6 +151,13 @@
    "fieldtype": "Table",
    "label": "Flight Crew",
    "options": "Flight Crew Member"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "gate",
+   "fieldtype": "Data",
+   "label": "Gate",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
@@ -163,7 +171,7 @@
    "link_fieldname": "flight"
   }
  ],
- "modified": "2026-08-25 07:01:47.157703",
+ "modified": "2026-08-25 13:19:30.333286",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane Flight",

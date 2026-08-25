@@ -13,6 +13,7 @@
   "status",
   "column_break_sqdu",
   "flight",
+  "gate",
   "seat",
   "section_break_boti",
   "source_airport_code",
@@ -164,13 +165,20 @@
    "fieldtype": "Data",
    "label": "Seat",
    "read_only": 1
+  },
+  {
+   "fetch_from": "flight.gate",
+   "fieldname": "gate",
+   "fieldtype": "Data",
+   "label": "Gate",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-08-20 15:56:43.525459",
+ "modified": "2026-08-25 13:16:35.573891",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane Ticket",
@@ -188,43 +196,6 @@
    "role": "System Manager",
    "share": 1,
    "submit": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "if_owner": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Travel Agent",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Airport Authority Personnel",
-   "share": 1,
-   "submit": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Flight Crew Member",
-   "share": 1,
    "write": 1
   }
  ],
