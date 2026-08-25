@@ -143,6 +143,7 @@
    "fieldname": "last_reminder_sent_on",
    "fieldtype": "Date",
    "label": "Last Reminder Sent On",
+   "no_copy": 1,
    "read_only": 1
   },
   {

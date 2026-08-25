@@ -7,6 +7,10 @@ import frappe
 from frappe.tests import IntegrationTestCase
 from frappe.utils import add_days, today
 
+from airplane_mode.airport_shop_management.doctype.shop_lease.shop_lease import (
+	generate_rent_invoices,
+)
+
 
 # On IntegrationTestCase, the doctype test records and all
 # link-field test record dependencies are recursively loaded
@@ -58,6 +62,58 @@ class IntegrationTestShopLease(IntegrationTestCase):
 		self.assertEqual(lease.status, "Cancelled")
 		self.assertEqual(
 			frappe.db.get_value("Airport Shop", self.shop.name, "status"), "Available"
+		)
+		self.assertFalse(
+			frappe.db.exists(
+				"Shop Rent Invoice",
+				{"lease": lease.name, "docstatus": 1},
+			)
+		)
+
+	def test_submit_generates_an_anchor_date_safe_monthly_schedule(self):
+		lease = self._make_lease(
+			start_date="2027-01-31",
+			end_date="2027-03-31",
+			first_payment_due_date="2027-01-31",
+			monthly_rent_amount=1_250,
+		)
+
+		lease.submit()
+
+		invoices = frappe.get_all(
+			"Shop Rent Invoice",
+			filters={"lease": lease.name},
+			fields=[
+				"docstatus",
+				"airport",
+				"shop",
+				"tenant",
+				"billing_month",
+				"due_date",
+				"amount_due",
+			],
+			order_by="due_date asc",
+		)
+
+		self.assertEqual(
+			[str(invoice.due_date) for invoice in invoices],
+			["2027-01-31", "2027-02-28", "2027-03-31"],
+		)
+		self.assertEqual(
+			[str(invoice.billing_month) for invoice in invoices],
+			["2027-01-01", "2027-02-01", "2027-03-01"],
+		)
+		for invoice in invoices:
+			self.assertEqual(invoice.docstatus, 1)
+			self.assertEqual(invoice.airport, self.airport.name)
+			self.assertEqual(invoice.shop, self.shop.name)
+			self.assertEqual(invoice.tenant, self.tenant.name)
+			self.assertEqual(invoice.amount_due, 1_250)
+
+		generate_rent_invoices(lease)
+		self.assertEqual(
+			frappe.db.count("Shop Rent Invoice", {"lease": lease.name}),
+			3,
 		)
 
 	def test_future_lease_reserves_shop(self):

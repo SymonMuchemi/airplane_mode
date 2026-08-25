@@ -4,7 +4,7 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import flt, getdate, nowdate
+from frappe.utils import add_months, flt, get_first_day, getdate, nowdate
 
 
 class ShopLease(Document):
@@ -19,13 +19,16 @@ class ShopLease(Document):
 		self.status = self._get_status_for_today()
 
 	def on_submit(self):
+		generate_rent_invoices(self)
 		update_shop_occupancy(self.shop)
 
 	def before_cancel(self):
 		self._lock_shop()
+		self._validate_no_submitted_payments()
 		self.status = "Cancelled"
 
 	def on_cancel(self):
+		cancel_rent_invoices(self.name)
 		update_shop_occupancy(self.shop)
 
 	def _validate_lease_dates(self):
@@ -85,6 +88,88 @@ class ShopLease(Document):
 			return "Upcoming"
 
 		return "Active"
+
+	def _validate_no_submitted_payments(self):
+		submitted_payment = frappe.db.exists(
+			"Shop Rent Payment",
+			{"lease": self.name, "docstatus": 1},
+		)
+		if submitted_payment:
+			frappe.throw(
+				_("Cancel payment {0} before cancelling this lease.").format(
+					frappe.get_desk_link("Shop Rent Payment", submitted_payment)
+				)
+			)
+
+
+def generate_rent_invoices(lease):
+	"""Create one submitted rent invoice for each monthly due date."""
+	frappe.db.get_value("Shop Lease", lease.name, "name", for_update=True)
+
+	first_due_date = getdate(lease.first_payment_due_date)
+	end_date = getdate(lease.end_date)
+	month_offset = 0
+
+	while True:
+		due_date = getdate(add_months(first_due_date, month_offset))
+		if due_date > end_date:
+			break
+
+		billing_month = getdate(get_first_day(due_date))
+		existing_invoice = frappe.db.get_value(
+			"Shop Rent Invoice",
+			{
+				"lease": lease.name,
+				"billing_month": billing_month,
+				"docstatus": ("<", 2),
+			},
+			["name", "docstatus", "due_date", "amount_due"],
+			as_dict=True,
+		)
+
+		if existing_invoice:
+			_validate_existing_invoice(existing_invoice, lease, due_date)
+			if existing_invoice.docstatus == 0:
+				invoice = frappe.get_doc("Shop Rent Invoice", existing_invoice.name)
+				invoice.flags.ignore_permissions = True
+				invoice.submit()
+		else:
+			invoice = frappe.get_doc(
+				{
+					"doctype": "Shop Rent Invoice",
+					"lease": lease.name,
+					"billing_month": billing_month,
+					"due_date": due_date,
+					"amount_due": lease.monthly_rent_amount,
+				}
+			)
+			invoice.insert(ignore_permissions=True)
+			invoice.submit()
+
+		month_offset += 1
+
+
+def _validate_existing_invoice(invoice, lease, due_date):
+	precision = frappe.get_precision("Shop Rent Invoice", "amount_due")
+	if getdate(invoice.due_date) != due_date or flt(invoice.amount_due, precision) != flt(
+		lease.monthly_rent_amount, precision
+	):
+		frappe.throw(
+			_("Existing rent invoice {0} does not match the lease payment schedule.").format(
+				frappe.get_desk_link("Shop Rent Invoice", invoice.name)
+			)
+		)
+
+
+def cancel_rent_invoices(lease):
+	for invoice_name in frappe.get_all(
+		"Shop Rent Invoice",
+		filters={"lease": lease, "docstatus": 1},
+		pluck="name",
+	):
+		invoice = frappe.get_doc("Shop Rent Invoice", invoice_name)
+		invoice.flags.ignore_permissions = True
+		invoice.cancel()
 
 
 def update_shop_occupancy(shop):
