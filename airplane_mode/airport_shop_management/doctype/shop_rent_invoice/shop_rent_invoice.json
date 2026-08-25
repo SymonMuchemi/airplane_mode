@@ -1,0 +1,207 @@
+{
+ "actions": [],
+ "autoname": "RENT-INV-.#####",
+ "creation": "2026-08-26 01:18:24.609152",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_9nok",
+  "amended_from",
+  "lease",
+  "airport",
+  "status",
+  "column_break_aogn",
+  "shop",
+  "tenant",
+  "last_reminder_sent_on",
+  "section_break_xcfo",
+  "billing_month",
+  "column_break_buwd",
+  "due_date",
+  "section_break_yxos",
+  "amount_due",
+  "column_break_tcoe",
+  "paid_amount",
+  "outstanding_amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_9nok",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Shop Rent Invoice",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "lease",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Lease",
+   "options": "Shop Lease",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "lease.shop",
+   "fieldname": "shop",
+   "fieldtype": "Link",
+   "label": "Shop",
+   "options": "Airport Shop",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fetch_from": "lease.tenant",
+   "fieldname": "tenant",
+   "fieldtype": "Link",
+   "label": "Tenant",
+   "options": "Shop Tenant",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_aogn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_xcfo",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "billing_month",
+   "fieldtype": "Date",
+   "label": "Billing Month",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_buwd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "due_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Due Date",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_yxos",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amount_due",
+   "fieldtype": "Currency",
+   "label": "Amount Due",
+   "non_negative": 1,
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_tcoe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "paid_amount",
+   "fieldtype": "Currency",
+   "label": "Paid Amount",
+   "non_negative": 1,
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "outstanding_amount",
+   "fieldtype": "Currency",
+   "label": "Outstanding Amount",
+   "non_negative": 1,
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Unpaid",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Unpaid\nPartly Paid\nPaid\nOverdue\nCancelled",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "last_reminder_sent_on",
+   "fieldtype": "Date",
+   "label": "Last Reminder Sent On",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "lease.airport",
+   "fieldname": "airport",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Airport",
+   "options": "Airport",
+   "read_only": 1,
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-08-26 01:33:32.407331",
+ "modified_by": "Administrator",
+ "module": "Airport Shop Management",
+ "name": "Shop Rent Invoice",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Airport Authority Personnel",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
