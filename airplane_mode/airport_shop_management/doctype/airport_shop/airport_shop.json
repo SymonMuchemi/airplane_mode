@@ -1,0 +1,142 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "autoname": "SHOP-.####",
+ "creation": "2026-08-25 23:47:02.716279",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "airport",
+  "status",
+  "shop_image",
+  "column_break_kqcv",
+  "shop_number",
+  "shop_name",
+  "monthly_rent_amount",
+  "section_break_jlda",
+  "area",
+  "area_unit",
+  "column_break_nzpm",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "airport",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Airport",
+   "options": "Airport",
+   "reqd": 1
+  },
+  {
+   "default": "Available",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Available\nOccupied",
+   "sort_options": 1
+  },
+  {
+   "fieldname": "shop_image",
+   "fieldtype": "Attach Image",
+   "hidden": 1,
+   "label": "Shop Image"
+  },
+  {
+   "fieldname": "column_break_kqcv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "shop_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Shop Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "shop_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Shop Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "monthly_rent_amount",
+   "fieldtype": "Currency",
+   "label": "Monthly Rent Amount",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "section_break_jlda",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "area",
+   "fieldtype": "Float",
+   "label": "Area",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "default": "Square Meters",
+   "fieldname": "area_unit",
+   "fieldtype": "Select",
+   "label": "Area Unit",
+   "options": "Square Feet\nSquare Meters"
+  },
+  {
+   "fieldname": "column_break_nzpm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  }
+ ],
+ "grid_page_length": 50,
+ "image_field": "shop_image",
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-08-26 00:12:39.126737",
+ "modified_by": "Administrator",
+ "module": "Airport Shop Management",
+ "name": "Airport Shop",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Airport Authority Personnel",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "shop_name",
+ "track_changes": 1
+}
