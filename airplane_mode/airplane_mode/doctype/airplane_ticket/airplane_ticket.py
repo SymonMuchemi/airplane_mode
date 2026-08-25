@@ -9,6 +9,7 @@ from frappe.utils import flt
 
 class AirplaneTicket(Document):
 	def validate(self):
+		self.check_capacity(self.flight)
 		add_on_types = [item.item for item in self.add_ons]
 		if len(add_on_types) != len(set(add_on_types)):
 			frappe.throw("You cannot add more than one add-on of the same type.")
@@ -40,4 +41,4 @@ class AirplaneTicket(Document):
 		existing_tickets_count = frappe.db.count("Airplane Ticket", filters={"flight": flight, "docstatus": ["!=", 2]})
 
 		if existing_tickets_count >= airplane_capacity:
-			frappe.response["message"] = "The airplane has reached its seating capacity. Cannot create a new ticket."
+			frappe.throw("The airplane has reached its seating capacity. Cannot create a new ticket.")

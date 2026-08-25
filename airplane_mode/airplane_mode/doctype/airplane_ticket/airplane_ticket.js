@@ -28,23 +28,4 @@ frappe.ui.form.on("Airplane Ticket", {
 			__("Actions"),
 		);
 	},
-	validate(frm) {
-		if (frm.is_new() && frm.doc.flight) {
-			frappe.call({
-				method: "check_capacity",
-				doc: frm.doc,
-				args: {
-					flight: frm.doc.flight,
-				},
-				async: false,
-				callback: function (r) {
-					if (r.message) {
-						frappe.msgprint(__(r.message));
-						frappe.validated = false;
-					}
-					console.log(r.message);
-				},
-			});
-		}
-	},
 });
