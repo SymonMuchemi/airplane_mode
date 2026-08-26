@@ -21,6 +21,19 @@ app_license = "mit"
 # 	}
 # ]
 
+fixtures = [
+	{
+		"doctype": "Shop Type",
+		"filters": [
+			[
+				"name",
+				"in",
+				["Stall", "Walk-through", "Normal"],
+			],
+		],
+	},
+]
+
 # Includes in <head>
 # ------------------
 
