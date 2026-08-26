@@ -64,6 +64,13 @@ app_license = "mit"
 # 	"Role": "home_page"
 # }
 
+# Website Routing
+# ---------------
+
+website_route_rules = [
+	{"from_route": "/shops/<shop>", "to_route": "shop"},
+]
+
 # Generators
 # ----------
 
@@ -255,4 +262,3 @@ app_license = "mit"
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
-

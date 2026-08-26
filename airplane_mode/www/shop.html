@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta
+			name="description"
+			content="Details for {{ shop.shop_name | e }} at {{ shop.airport | e }}."
+		>
+		<title>{{ shop.shop_name | e }} | Airport Shops</title>
+		<link rel="stylesheet" href="/assets/airplane_mode/css/shop.css">
+		<style>
+			body {
+				background: #f5f7fa;
+				color: #1f2933;
+			}
+
+			.portal-nav {
+				border-bottom: 1px solid #e4e7eb;
+			}
+
+			.portal-shell {
+				box-sizing: border-box;
+				margin: 0 auto;
+				max-width: 68rem;
+				padding: 5.5rem 1rem 3rem;
+			}
+
+			.back-link {
+				display: inline-block;
+				margin-bottom: 1rem;
+			}
+
+			.shop-layout > * {
+				display: flex;
+			}
+
+			.shop-visual,
+			.shop-details {
+				flex: 1;
+				margin-bottom: 0;
+			}
+
+			.shop-image,
+			.shop-image-placeholder {
+				aspect-ratio: 4 / 3;
+				background: #d9e2ec;
+				width: 100%;
+			}
+
+			.shop-image {
+				object-fit: cover;
+			}
+
+			.shop-image-placeholder {
+				align-items: center;
+				color: #486581;
+				display: flex;
+				font-size: 5rem;
+				justify-content: center;
+			}
+
+			.shop-details header {
+				align-items: flex-start;
+				display: flex;
+				justify-content: space-between;
+			}
+
+			.shop-details header h1 {
+				font-size: clamp(1.7rem, 5vw, 2.5rem);
+				line-height: 1.15;
+				margin-right: 0.75rem;
+			}
+
+			.shop-summary {
+				color: #52606d;
+			}
+
+			.shop-facts {
+				display: grid;
+				gap: 0.65rem 1rem;
+				grid-template-columns: minmax(7rem, auto) 1fr;
+				margin: 1.25rem 0 0;
+			}
+
+			.shop-facts dt {
+				color: #52606d;
+				font-weight: 700;
+			}
+
+			.shop-facts dd {
+				margin: 0;
+			}
+
+			.shop-details footer {
+				border-top: 1px solid #e4e7eb;
+			}
+
+			.shop-details footer .button {
+				box-sizing: border-box;
+				font-size: 1.05rem;
+				padding: 0.65rem 1rem;
+				width: 100%;
+			}
+
+			.site-footer {
+				color: #7b8794;
+				padding: 0 1rem 2rem;
+				text-align: center;
+			}
+
+			@media (max-width: 499px) {
+				.shop-facts {
+					grid-template-columns: 1fr;
+				}
+
+				.shop-facts dd + dt {
+					margin-top: 0.35rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<nav class="portal-nav" aria-label="Main navigation">
+			<a class="brand" href="/shops">Airport Shops</a>
+			<div class="menu">
+				<a class="pseudo button" href="/shops">Browse Shops</a>
+			</div>
+		</nav>
+
+		<main class="portal-shell">
+			<a class="back-link" href="/shops">&larr; Back to all shops</a>
+
+			<div class="flex one two-700 shop-layout">
+				<div>
+					<article class="card shop-visual">
+						{% if shop.shop_image %}
+						<img
+							class="shop-image"
+							src="{{ shop.shop_image | e }}"
+							alt="{{ shop.shop_name | e }}"
+						>
+						{% else %}
+						<div class="shop-image-placeholder" aria-hidden="true">&#127978;</div>
+						{% endif %}
+					</article>
+				</div>
+
+				<div>
+					<article class="card shop-details">
+						<header>
+							<h1>{{ shop.shop_name | e }}</h1>
+							{% if shop.status == "Available" %}
+							<span class="success label">Available</span>
+							{% else %}
+							<span class="warning label">{{ shop.status | e }}</span>
+							{% endif %}
+						</header>
+
+						<section>
+							{% if shop.description %}
+							<p class="shop-summary">{{ shop.description | e }}</p>
+							{% else %}
+							<p class="shop-summary">
+								A commercial space located within {{ shop.airport | e }}.
+							</p>
+							{% endif %}
+
+							<dl class="shop-facts">
+								<dt>Shop number</dt>
+								<dd>{{ shop.shop_number | e }}</dd>
+
+								<dt>Airport</dt>
+								<dd>{{ shop.airport | e }}</dd>
+
+								<dt>Area</dt>
+								<dd>{{ shop.area }} {{ shop.area_unit | e }}</dd>
+
+								<dt>Monthly rent</dt>
+								<dd>
+									{{ frappe.format_value(shop.monthly_rent_amount, {"fieldtype": "Currency"}) }}
+								</dd>
+							</dl>
+						</section>
+
+						<footer>
+							<a
+								class="button"
+								href="/shop-lead/new?shop={{ shop.name | urlencode }}"
+							>
+								I am interested in this shop
+							</a>
+						</footer>
+					</article>
+				</div>
+			</div>
+		</main>
+
+		<footer class="site-footer">
+			<small>Airport Shop Management</small>
+		</footer>
+	</body>
+</html>

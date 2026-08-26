@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta
+			name="description"
+			content="Browse shops available across our airport locations."
+		>
+		<title>Airport Shops</title>
+		<link rel="stylesheet" href="/assets/airplane_mode/css/shop.css">
+		<style>
+			body {
+				background: #f5f7fa;
+				color: #1f2933;
+			}
+
+			.portal-nav {
+				border-bottom: 1px solid #e4e7eb;
+			}
+
+			.portal-shell {
+				box-sizing: border-box;
+				margin: 0 auto;
+				max-width: 72rem;
+				padding: 5.5rem 1rem 3rem;
+			}
+
+			.portal-hero {
+				margin: 0 auto 2rem;
+				max-width: 44rem;
+				text-align: center;
+			}
+
+			.portal-hero h1 {
+				font-size: clamp(2rem, 6vw, 3.5rem);
+				line-height: 1.1;
+				margin-bottom: 0.5rem;
+			}
+
+			.portal-hero p {
+				color: #52606d;
+				font-size: 1.1rem;
+				margin: 0;
+			}
+
+			.shop-grid > * {
+				display: flex;
+			}
+
+			.shop-card {
+				display: flex;
+				flex: 1;
+				flex-direction: column;
+				margin-bottom: 0;
+			}
+
+			.shop-card__image,
+			.shop-card__placeholder {
+				aspect-ratio: 16 / 9;
+				background: #d9e2ec;
+				width: 100%;
+			}
+
+			.shop-card__image {
+				object-fit: cover;
+			}
+
+			.shop-card__placeholder {
+				align-items: center;
+				color: #486581;
+				display: flex;
+				font-size: 3rem;
+				justify-content: center;
+			}
+
+			.shop-card header {
+				align-items: center;
+				display: flex;
+				justify-content: space-between;
+			}
+
+			.shop-card header h2 {
+				font-size: 1.15rem;
+				line-height: 1.3;
+				margin-right: 0.5rem;
+			}
+
+			.shop-card section {
+				color: #52606d;
+				flex: 1;
+			}
+
+			.shop-card__facts {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+
+			.shop-card__facts li + li {
+				margin-top: 0.35rem;
+			}
+
+			.shop-card footer {
+				border-top: 1px solid #e4e7eb;
+			}
+
+			.shop-card footer .button {
+				box-sizing: border-box;
+				width: 100%;
+			}
+
+			.empty-state {
+				background: #fff;
+				border: 1px solid #d9e2ec;
+				border-radius: 0.3rem;
+				padding: 3rem 1rem;
+				text-align: center;
+			}
+
+			.site-footer {
+				color: #7b8794;
+				padding: 0 1rem 2rem;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<nav class="portal-nav" aria-label="Main navigation">
+			<a class="brand" href="/shops">Airport Shops</a>
+			<div class="menu">
+				<a class="pseudo button" href="/shops" aria-current="page">Browse Shops</a>
+			</div>
+		</nav>
+
+		<main class="portal-shell">
+			<header class="portal-hero">
+				<h1>Find your next airport shop</h1>
+				<p>Explore retail spaces across our airport locations.</p>
+			</header>
+
+			{% if shops %}
+			<div class="flex one two-600 three-900 shop-grid">
+				{% for shop in shops %}
+				<div>
+					<article class="card shop-card">
+						{% if shop.shop_image %}
+						<img
+							class="shop-card__image"
+							src="{{ shop.shop_image | e }}"
+							alt="{{ shop.shop_name | e }}"
+							loading="lazy"
+						>
+						{% else %}
+						<div class="shop-card__placeholder" aria-hidden="true">&#127978;</div>
+						{% endif %}
+
+						<header>
+							<h2>{{ shop.shop_name | e }}</h2>
+							{% if shop.status == "Available" %}
+							<span class="success label">Available</span>
+							{% else %}
+							<span class="warning label">{{ shop.status | e }}</span>
+							{% endif %}
+						</header>
+
+						<section>
+							<ul class="shop-card__facts">
+								<li><strong>Shop:</strong> {{ shop.shop_number | e }}</li>
+								<li><strong>Airport:</strong> {{ shop.airport | e }}</li>
+								<li>
+									<strong>Area:</strong>
+									{{ shop.area }} {{ shop.area_unit | e }}
+								</li>
+								<li>
+									<strong>Monthly rent:</strong>
+									{{ frappe.format_value(shop.monthly_rent_amount, {"fieldtype": "Currency"}) }}
+								</li>
+							</ul>
+						</section>
+
+						<footer>
+							<a class="button" href="/shops/{{ shop.name | urlencode }}">
+								View shop details
+							</a>
+						</footer>
+					</article>
+				</div>
+				{% endfor %}
+			</div>
+			{% else %}
+			<section class="empty-state">
+				<h2>No shops to display</h2>
+				<p>Please check again later for newly listed airport spaces.</p>
+			</section>
+			{% endif %}
+		</main>
+
+		<footer class="site-footer">
+			<small>Airport Shop Management</small>
+		</footer>
+	</body>
+</html>
