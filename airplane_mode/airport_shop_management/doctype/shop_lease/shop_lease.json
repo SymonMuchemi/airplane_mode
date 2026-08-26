@@ -98,8 +98,8 @@
    "fieldtype": "Section Break"
   },
   {
-   "fetch_if_empty": 1,
    "fetch_from": "shop.monthly_rent_amount",
+   "fetch_if_empty": 1,
    "fieldname": "monthly_rent_amount",
    "fieldtype": "Currency",
    "label": "Monthly Rent Amount",
@@ -124,8 +124,13 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2026-08-26 00:51:58.807011",
+ "links": [
+  {
+   "link_doctype": "Shop Rent Invoice",
+   "link_fieldname": "lease"
+  }
+ ],
+ "modified": "2026-08-26 18:19:07.056913",
  "modified_by": "Administrator",
  "module": "Airport Shop Management",
  "name": "Shop Lease",
