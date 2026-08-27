@@ -1,0 +1,39 @@
+<h2>{{ _("Rent Payment Reminder") }}</h2>
+
+<p>{{ _("Dear {0},").format(tenant_name) | e }}</p>
+
+<p>
+	{{
+		_("This is a reminder that rent for shop {0} ({1}) is now due.").format(
+			shop_name,
+			shop_number,
+		) | e
+	}}
+</p>
+
+<table class="table table-bordered">
+	<tbody>
+		<tr>
+			<td><strong>{{ _("Invoice") }}</strong></td>
+			<td>{{ invoice_name | e }}</td>
+		</tr>
+		<tr>
+			<td><strong>{{ _("Billing Month") }}</strong></td>
+			<td>{{ billing_month | e }}</td>
+		</tr>
+		<tr>
+			<td><strong>{{ _("Due Date") }}</strong></td>
+			<td>{{ due_date | e }}</td>
+		</tr>
+		<tr>
+			<td><strong>{{ _("Outstanding Amount") }}</strong></td>
+			<td>{{ formatted_outstanding_amount | e }}</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>
+	{{ _("Please arrange payment at your earliest convenience. If you have already paid, please disregard this message.") }}
+</p>
+
+<p>{{ _("Thank you.") }}</p>

@@ -18,6 +18,13 @@ class IntegrationTestAirportShop(IntegrationTestCase):
 	def setUp(self):
 		super().setUp()
 		unique_id = uuid4().hex[:8]
+		self.shop_type = frappe.get_doc(
+			{
+				"doctype": "Shop Type",
+				"type": f"Test Shop Type {unique_id}",
+				"is_enabled": 1,
+			}
+		).insert()
 		self.first_airport = self._make_airport(f"First {unique_id}", unique_id)
 		self.second_airport = self._make_airport(f"Second {unique_id}", unique_id[::-1])
 
@@ -66,6 +73,7 @@ class IntegrationTestAirportShop(IntegrationTestCase):
 			{
 				"doctype": "Airport Shop",
 				"airport": airport,
+				"type": self.shop_type.name,
 				"shop_number": shop_number,
 				"shop_name": f"Test Shop {shop_number}",
 				"monthly_rent_amount": monthly_rent_amount,

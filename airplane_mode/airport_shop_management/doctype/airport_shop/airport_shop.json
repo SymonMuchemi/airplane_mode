@@ -68,8 +68,7 @@
    "fieldtype": "Currency",
    "label": "Monthly Rent Amount",
    "non_negative": 1,
-   "precision": "2",
-   "reqd": 1
+   "precision": "2"
   },
   {
    "fieldname": "section_break_jlda",

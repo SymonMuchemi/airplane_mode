@@ -24,10 +24,18 @@ class IntegrationTestShopLease(IntegrationTestCase):
 		super().setUp()
 		unique_id = uuid4().hex[:8]
 		self.airport = self._make_airport(unique_id)
+		self.shop_type = frappe.get_doc(
+			{
+				"doctype": "Shop Type",
+				"type": f"Test Shop Type {unique_id}",
+				"is_enabled": 1,
+			}
+		).insert()
 		self.shop = frappe.get_doc(
 			{
 				"doctype": "Airport Shop",
 				"airport": self.airport.name,
+				"type": self.shop_type.name,
 				"shop_number": f"SHOP-{unique_id}",
 				"shop_name": f"Test Shop {unique_id}",
 				"monthly_rent_amount": 1_500,
