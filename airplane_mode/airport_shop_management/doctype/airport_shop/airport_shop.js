@@ -11,4 +11,15 @@ frappe.ui.form.on("Airport Shop", {
 			};
 		});
 	},
+	refresh(frm) {
+		frm.add_custom_button("Tenant", async () => {
+			let tenants = await frappe.db.get_list(
+				"Shop Lease",
+				(filters = { shop: frm.doc.name }),
+				// (field = ["tenant"]),
+			);
+			
+			console.log("Tenants: ", tenants);
+		});
+	},
 });

@@ -12,6 +12,7 @@ class AirplaneFlight(WebsiteGenerator):
             self.route = "flights/" + frappe.scrub(self.name)
 
     def before_submit(self):
+        self.check_duplicate_captains()
         self.status = "Completed"
 
     def on_update_after_submit(self):
@@ -32,6 +33,17 @@ class AirplaneFlight(WebsiteGenerator):
             enqueue_after_commit=True,
             flight_name=self.name,
         )
+
+    def check_duplicate_captains(self):
+        crew = self.flight_crew
+        captains = []
+
+        for member in crew:
+            if member.role == "Captain":
+                captains.append(member.user)
+
+        if len(captains) > 1:
+            frappe.throw("Can only have one captain!")
 
 
 def sync_gate_to_tickets(flight_name):
